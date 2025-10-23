@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SBG Groups Order App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- PWA Meta Tags -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="SBG Orders">
+<link rel="apple-touch-icon" href="{{ url_for('static', filename='logo.png') }}">
+
+<!-- PWA Manifest -->
+<link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+
+<!-- Service Worker Registration -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('{{ url_for("static", filename="sw.js") }}')
+        .then(function(registration) {
+          console.log('ServiceWorker registration successful');
+        })
+        .catch(function(error) {
+          console.log('ServiceWorker registration failed: ', error);
+        });
+    });
+  }
+</script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="SBG Groups Logo" class="logo">
+            </div>
+            <h1 class="header-title">SBG Groups</h1>
+            <p class="header-subtitle">Order Management System</p>
+        </header>
+
+        <!-- Welcome Screen -->
+        <div id="welcome-screen" class="screen active">
+            <div class="welcome-note floating">
+                <h1>Welcome to SBG Groups</h1>
+                <p>Streamlined Order Management Solution</p>
+            </div>
+            <button id="start-btn" class="btn-primary">Get Started</button>
+        </div>
+
+        <!-- Date Selection Screen -->
+        <div id="date-screen" class="screen">
+            <div class="progress-indicator">
+                <div class="progress-step active">1</div>
+                <div class="progress-step">2</div>
+                <div class="progress-step">3</div>
+                <div class="progress-step">4</div>
+                <div class="progress-step">5</div>
+            </div>
+            <h2>Select Today's Date</h2>
+            <input type="date" id="date-picker">
+            <div class="button-group">
+                <button id="date-next" class="btn-primary">Next</button>
+            </div>
+        </div>
+
+        <!-- Outlet Selection Screen -->
+        <div id="outlet-screen" class="screen">
+            <div class="progress-indicator">
+                <div class="progress-step completed">1</div>
+                <div class="progress-step active">2</div>
+                <div class="progress-step">3</div>
+                <div class="progress-step">4</div>
+                <div class="progress-step">5</div>
+            </div>
+            <h2>Select Your Outlet</h2>
+            
+            <!-- Hassan Division -->
+            <div class="division-section">
+                <h3>Hassan Division</h3>
+                <div class="outlet-grid">
+                    <button class="outlet-btn" data-division="hassan">SBG Bar Point</button>
+                    <button class="outlet-btn" data-division="hassan">Chanakya Bar</button>
+                    <button class="outlet-btn" data-division="hassan">Cocktail Bar</button>
+                    <button class="outlet-btn" data-division="hassan">Crystal Bar</button>
+                    <button class="outlet-btn" data-division="hassan">Gangadhreshwara Wines</button>
+                    <button class="outlet-btn" data-division="hassan">Hamsa Bar</button>
+                    <button class="outlet-btn" data-division="hassan">Speed Bar</button>
+                    <button class="outlet-btn" data-division="hassan">Kalinga</button>
+                    <button class="outlet-btn" data-division="hassan">Kenchamba Wines</button>
+                    <button class="outlet-btn" data-division="hassan">Moonlight</button>
+                    <button class="outlet-btn" data-division="hassan">Pruthvi Bar</button>
+                    <button class="outlet-btn" data-division="hassan">Sachin Wines</button>
+                    <button class="outlet-btn" data-division="hassan">Salagame Wines</button>
+                    <button class="outlet-btn" data-division="hassan">Triveni</button>
+                </div>
+            </div>
+            
+            <!-- Sakleshpura Division -->
+            <div class="division-section">
+                <h3>Sakleshpura Division</h3>
+                <div class="outlet-grid">
+                    <button class="outlet-btn" data-division="sakleshpura">Seema</button>
+                    <button class="outlet-btn" data-division="sakleshpura">Hettur</button>
+                    <button class="outlet-btn" data-division="sakleshpura">Sudha Bar</button>
+                    <button class="outlet-btn" data-division="sakleshpura">Vidhya Wines</button>
+                </div>
+            </div>
+            
+            <!-- K R Pete Division -->
+            <div class="division-section">
+                <h3>K R Pete Division</h3>
+                <div class="outlet-grid">
+                    <button class="outlet-btn" data-division="krpete">Ganesh Bar</button>
+                    <button class="outlet-btn" data-division="krpete">Chandan Wines</button>
+                    <button class="outlet-btn" data-division="krpete">Srinidi Wines</button>
+                    <button class="outlet-btn" data-division="krpete">SBG Bar Kadbahalli</button>
+                    <button class="outlet-btn" data-division="krpete">Sachin Wines Mandya</button>
+                    <button class="outlet-btn" data-division="krpete">Vinayaka Wines</button>
+                    <button class="outlet-btn" data-division="krpete">Byrava Wines</button>
+                </div>
+            </div>
+            
+            <!-- Mudigere Division -->
+            <div class="division-section">
+                <h3>Mudigere Division</h3>
+                <div class="outlet-grid">
+                    <button class="outlet-btn" data-division="mudigere">Bairaveshwara Bar (Vastare)</button>
+                    <button class="outlet-btn" data-division="mudigere">Gangadhreshwara Bar (Koppa)</button>
+                    <button class="outlet-btn" data-division="mudigere">Gangadhreshwara Bar (Hirebyle)</button>
+                    <button class="outlet-btn" data-division="mudigere">SBG Bar Mudigere</button>
+                    <button class="outlet-btn" data-division="mudigere">Hoysala Wines</button>
+                    <button class="outlet-btn" data-division="mudigere">Pushpak bar</button>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button id="outlet-back" class="btn-secondary">Back</button>
+                <button id="outlet-next" class="btn-primary" disabled>Next</button>
+            </div>
+        </div>
+
+        <!-- Beverages Selection Screen -->
+        <div id="beverages-screen" class="screen">
+            <div class="progress-indicator">
+                <div class="progress-step completed">1</div>
+                <div class="progress-step completed">2</div>
+                <div class="progress-step active">3</div>
+                <div class="progress-step">4</div>
+                <div class="progress-step">5</div>
+            </div>
+            <h2>SELECT IML & WINES</h2>
+            <div id="beverages-container">
+                <!-- Beverages will be dynamically generated here -->
+            </div>
+            <div class="button-group">
+                <button id="beverages-back" class="btn-secondary">Back</button>
+                <button id="beverages-next" class="btn-primary">Next</button>
+            </div>
+        </div>
+
+        <!-- Soft Drinks Selection Screen -->
+        <div id="soft-drinks-screen" class="screen">
+            <div class="progress-indicator">
+                <div class="progress-step completed">1</div>
+                <div class="progress-step completed">2</div>
+                <div class="progress-step completed">3</div>
+                <div class="progress-step active">4</div>
+                <div class="progress-step">5</div>
+            </div>
+            <h2>SELECT SOFT DRINKS</h2>
+            <div id="soft-drinks-container">
+                <!-- Soft drinks will be dynamically generated here -->
+            </div>
+            <div class="button-group">
+                <button id="soft-drinks-back" class="btn-secondary">Back</button>
+                <button id="soft-drinks-next" class="btn-primary">Next</button>
+            </div>
+        </div>
+
+        <!-- Review Screen -->
+        <div id="review-screen" class="screen">
+            <div class="progress-indicator">
+                <div class="progress-step completed">1</div>
+                <div class="progress-step completed">2</div>
+                <div class="progress-step completed">3</div>
+                <div class="progress-step completed">4</div>
+                <div class="progress-step active">5</div>
+            </div>
+            <h2>Review Your Order</h2>
+            <div id="order-summary">
+                <!-- Order summary will be displayed here -->
+            </div>
+            <div class="button-group">
+                <button id="review-back" class="btn-secondary">Back</button>
+                <button id="submit-order" class="btn-primary">Submit Order</button>
+            </div>
+        </div>
+
+        <!-- Confirmation Screen -->
+        <div id="confirmation-screen" class="screen">
+            <div class="confirmation-message">
+                <h2>Order Submitted Successfully!</h2>
+                <p>Your order has been sent to SBG Groups.</p>
+                <p>You will receive a confirmation shortly.</p>
+                <button id="new-order" class="btn-primary">Place New Order</button>
+            </div>
+        </div>
+
+        <footer>
+            <p>Crafted by SBG Groups | © 2025 | Excellence in Order Management</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
